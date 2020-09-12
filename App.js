@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator }from '@react-navigation/stack';
 
 // import React, { Component,useState } from 'react';
-import {FlatList,StyleSheet, SafeAreaView, Text,TextInput,View, Button, Image} from 'react-native';
+import {TouchableWithoutFeedback, ScrollView, FlatList,StyleSheet, SafeAreaView, Text,TextInput,View, Button, Image} from 'react-native';
 
 const Stack = createStackNavigator();
 
@@ -36,21 +36,61 @@ const App = () => {
   );
 };
 
+
+const UserBar = ()=> {
+  return (
+    <View style={{flex:1, flexDirection: 'row', justifyContent:'space-between'}}> 
+
+    <View>
+    <Text>Wecome Back</Text>
+    <Text>Jason</Text>
+    </View>
+    <Text>Profile Image</Text>
+    </View>
+    );
+}
+
+
 const HomeScreen = ({ navigation }) => {
   return (
-    <View>
+    <View style={styles.container} >
+    <ScrollView>
+    <UserBar/>
 
-    <Image source={require('./img/home_exercise.png')} />
-    <Button
-    title="Go to Details"
-    onPress={() =>
-      //navigation.navigate('Profile', { name: 'Ksdf' })
+    <TouchableWithoutFeedback onPress={()=> 
       navigation.navigate('Details', {
         itemId: 0,
         other: 'whatever'
       })
-    }
+    }>
+    <View>
+    <Image source={require('./img/home_doctor.png')}
     />
+    <Text>Diabetes or Not? Check This Out</Text>
+    <Text>Subscribe specialized program to make you healthier</Text>
+    </View>
+    </TouchableWithoutFeedback>
+
+    <Text>Challenges</Text>
+    <TouchableWithoutFeedback onPress={()=> 
+      navigation.navigate('Details', {
+        itemId: 0,
+        other: 'whatever'
+      })
+    }>
+    <View>
+    <Image source={require('./img/home_exercise.png')}
+    />
+    <Text>Better Life from Health Food</Text>
+    <Text>Join this timed challenge for a chance to win an iPhone X!</Text>
+    
+    <Button style={{'justifyContent':'center'}}title='Get Started'/>
+    </View>
+    </TouchableWithoutFeedback>
+    
+    
+    </ScrollView>
+
     </View>
 
     );
@@ -90,13 +130,15 @@ function DetailsScreen({route, navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop:22
+    paddingTop:22,
+    paddingLeft:15,
+    paddingRight:15
   },
   item: {
     padding: 10,
     fontSize:18,
     height:44,
-  }
+  },
 });
 
 export default App;
