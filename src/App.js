@@ -33,7 +33,8 @@ const App = () => {
 
     <Stack.Screen
     name='QuestionPage'
-    component={QuestionPage}/>
+    component={QuestionPage}
+    />
 
     </Stack.Navigator>
   {/* Rest of your app code */}
@@ -45,12 +46,11 @@ const App = () => {
 const UserBar = ()=> {
   return (
     <View style={{flex:1, flexDirection: 'row', justifyContent:'space-between'}}> 
-
-    <View>
-    <Text>Wecome Back</Text>
-    <Text>Jason</Text>
-    </View>
-    <Text>Profile Image</Text>
+      <View>
+        <Text>Wecome Back</Text>
+        <Text>Jason</Text>
+      </View>
+      <Text>Profile Image</Text>
     </View>
     );
 }
@@ -66,7 +66,9 @@ const HomeScreen = ({ navigation }) => {
       //   itemId: 0,
       //   other: 'whatever'
       // })
-       navigation.navigate('QuestionPage')
+      navigation.navigate('QuestionPage', {
+          pageNumber: 0
+      })
     }>
     <View>
     <Image source={require('../img/home_doctor.png')}
@@ -84,7 +86,7 @@ const HomeScreen = ({ navigation }) => {
       })
     }>
     <View>
-   { <Image source={require('../img/home_exercise.png')}
+    { <Image source={require('../img/home_exercise.png')}
     />}
     <Text>Better Life from Health Food</Text>
     <Text>Join this timed challenge for a chance to win an iPhone X!</Text>
