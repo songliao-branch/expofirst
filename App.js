@@ -50,7 +50,6 @@ const UserBar = ()=> {
     );
 }
 
-
 const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container} >
@@ -66,7 +65,7 @@ const HomeScreen = ({ navigation }) => {
     <View>
     <Image source={require('./img/home_doctor.png')}
     />
-    <Text>Diabetes or Not? Check This Out</Text>
+    <Text style={styles.apptext}>Diabetes or Not? Check This Out</Text>
     <Text>Subscribe specialized program to make you healthier</Text>
     </View>
     </TouchableWithoutFeedback>
@@ -139,6 +138,9 @@ const styles = StyleSheet.create({
     fontSize:18,
     height:44,
   },
+  apptext: {
+    color: '#515a60'
+  }
 });
 
 export default App;
