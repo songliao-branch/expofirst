@@ -2,6 +2,7 @@ import 'react-native-gesture-handler';
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator }from '@react-navigation/stack';
+import * as Progress from 'react-native-progress';
 
 // import React, { Component,useState } from 'react';
 import {TouchableWithoutFeedback, ScrollView, FlatList,StyleSheet, SafeAreaView, Text,TextInput,View, Button, Image} from 'react-native';
@@ -23,7 +24,7 @@ const App = () => {
     <Stack.Screen 
     name='Home'
     component={HomeScreen}
-    options={{title:'Welcome Song'}}
+    options={{title:''}}
     />
 
     <Stack.Screen
@@ -34,6 +35,10 @@ const App = () => {
     <Stack.Screen
     name='QuestionPage'
     component={QuestionPage}
+    options={{ 
+      headerTitle: props => <LogoTitle {...props} />,
+      headerRight: () => <HeaderRight/>
+     }}
     />
 
     </Stack.Navigator>
@@ -42,6 +47,16 @@ const App = () => {
   );
 };
 
+function HeaderRight() {
+  return (
+      <Text>number/8</Text>
+    );
+}
+function LogoTitle() {
+  return (
+    <Progress.Bar progress={0.3} width={200} /> 
+    );
+}
 
 const UserBar = ()=> {
   return (
