@@ -5,6 +5,7 @@ import {createStackNavigator }from '@react-navigation/stack';
 
 // import React, { Component,useState } from 'react';
 import {TouchableWithoutFeedback, ScrollView, FlatList,StyleSheet, SafeAreaView, Text,TextInput,View, Button, Image} from 'react-native';
+import QuestionPage from './QuestionPage';
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,10 @@ const App = () => {
     name='Details'
     component={DetailsScreen}
     />
+
+    <Stack.Screen
+    name='QuestionPage'
+    component={QuestionPage}/>
 
     </Stack.Navigator>
   {/* Rest of your app code */}
@@ -57,10 +62,11 @@ const HomeScreen = ({ navigation }) => {
     <UserBar/>
 
     <TouchableWithoutFeedback onPress={()=> 
-      navigation.navigate('Details', {
-        itemId: 0,
-        other: 'whatever'
-      })
+      // navigation.navigate('Details', {
+      //   itemId: 0,
+      //   other: 'whatever'
+      // })
+       navigation.navigate('QuestionPage')
     }>
     <View>
     <Image source={require('../img/home_doctor.png')}
@@ -94,6 +100,8 @@ const HomeScreen = ({ navigation }) => {
 
     );
 };
+
+
 
 function ProfileScreen({route}) {
   return (
