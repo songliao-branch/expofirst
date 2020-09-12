@@ -63,7 +63,7 @@ const HomeScreen = ({ navigation }) => {
       })
     }>
     <View>
-    <Image source={require('./img/home_doctor.png')}
+    <Image source={require('../img/home_doctor.png')}
     />
     <Text style={styles.apptext}>Diabetes or Not? Check This Out</Text>
     <Text>Subscribe specialized program to make you healthier</Text>
@@ -78,8 +78,8 @@ const HomeScreen = ({ navigation }) => {
       })
     }>
     <View>
-    <Image source={require('./img/home_exercise.png')}
-    />
+   { <Image source={require('../img/home_exercise.png')}
+    />}
     <Text>Better Life from Health Food</Text>
     <Text>Join this timed challenge for a chance to win an iPhone X!</Text>
     
