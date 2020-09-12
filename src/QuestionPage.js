@@ -12,7 +12,7 @@ const Header = (props)=> {
 }
 
 function QuestionPage({route}) {
-	const {pageNumber} = route.params;
+	const { pageNumber } = route.params;
 
 	const options = ['yes', 'no'];
 

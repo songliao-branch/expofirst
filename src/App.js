@@ -9,41 +9,64 @@ import {TouchableWithoutFeedback, ScrollView, FlatList,StyleSheet, SafeAreaView,
 import QuestionPage from './QuestionPage';
 
 const Stack = createStackNavigator();
+const QuestionContext = React.createContext();
+
+var questionPageIndex = 0;
 
 const App = () => {
+  const questions=[
+  {
+    pageNumber:0,
+    progress: 0.5,
+    type: 'options',
+    question:'Have you been diagnosed with diabetes',
+    options:['yes','no'],
+    selected:-1
+  },
+  {
+    pageNumber:1,
+    progress: 0.2,
+    type: 'options',
+    question:'You are..',
+    options:['Female','Male'],
+    selected:-1
+  }];
+
   return (
-    <NavigationContainer>
-    <Stack.Navigator initialRouteName='Home'> 
+    <QuestionContext.Provider value={{questions}}>
+      <NavigationContainer>
+      <Stack.Navigator initialRouteName='Home'> 
 
-    <Stack.Screen
-    name='Profile'
-    component={ProfileScreen}
-    options={({route}) => ({title: route.params.name})}
-    />
+      <Stack.Screen
+      name='Profile'
+      component={ProfileScreen}
+      options={({route}) => ({title: route.params.name})}
+      />
 
-    <Stack.Screen 
-    name='Home'
-    component={HomeScreen}
-    options={{title:''}}
-    />
+      <Stack.Screen 
+      name='Home'
+      component={HomeScreen}
+      options={{title:''}}
+      />
 
-    <Stack.Screen
-    name='Details'
-    component={DetailsScreen}
-    />
+      <Stack.Screen
+      name='Details'
+      component={DetailsScreen}
+      />
 
-    <Stack.Screen
-    name='QuestionPage'
-    component={QuestionPage}
-    options={{ 
-      headerTitle: props => <LogoTitle {...props} />,
-      headerRight: () => <HeaderRight/>
-     }}
-    />
-
-    </Stack.Navigator>
-  {/* Rest of your app code */}
-  </NavigationContainer>
+      <Stack.Screen
+      name='QuestionPage'
+      component={QuestionPage}
+      options={{ 
+        headerTitle: (props) => <LogoTitle {...props} />,
+        headerRight: () => <HeaderRight/>
+      }}
+      />
+      </Stack.Navigator>
+    {/* Rest of your app code */}
+    </NavigationContainer>
+  </QuestionContext.Provider>
+    
   );
 };
 
@@ -52,9 +75,14 @@ function HeaderRight() {
       <Text>number/8</Text>
     );
 }
+
 function LogoTitle() {
+  const {questions} = React.useContext(QuestionContext);
+
   return (
-    <Progress.Bar progress={0.3} width={200} /> 
+
+    <Progress.Bar progress={questions[questionPageIndex].progress} width={200}
+    height ={6} color={styles.primaryTheme.color} unfilledColor={styles.secondaryTheme.color} borderWidth={0} /> 
     );
 }
 
@@ -149,8 +177,6 @@ function DetailsScreen({route, navigation}) {
     ); 
 }
 
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -165,7 +191,14 @@ const styles = StyleSheet.create({
   },
   apptext: {
     color: '#515a60'
+  },
+  primaryTheme: {
+    color: '#5cced8' //cyan
+  },
+  secondaryTheme: {
+    color : '#f0f0f0' //gray'
   }
+
 });
 
 export default App;
