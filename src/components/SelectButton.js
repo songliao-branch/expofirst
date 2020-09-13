@@ -14,8 +14,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 3,
     elevation:5,
-    marginLeft:5,
-    marginRight:5,
+    marginLeft:15,
+    marginRight:15,
     marginTop:5,
     height:100,
     width:'90%'
@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 3,
     elevation:5,
-    marginLeft:5,
-    marginRight:5,
+    marginLeft:15,
+    marginRight:15,
     marginTop:5,
     height:100,
     width:'90%'
@@ -41,14 +41,11 @@ const styles = StyleSheet.create({
   	flexDirection: 'row',
   	justifyContent:'space-between',
   	alignItems:'center',
+  	paddingLeft:10,
+  	paddingRight:20,
   }
 });
 
-function RenderSelectedIcon(selected) {
-	return (selected ? <Image source={images[selected]}/> 
-		: <Image source={images[unselected]}/>
-		)
-}
 
 export default class SelectButton extends React.Component {
   constructor(props) {
@@ -59,7 +56,7 @@ export default class SelectButton extends React.Component {
     return (
       <TouchableOpacity onPress={this.props.onPress} style={[this.props.selected? styles.selected : styles.unselected, this.props.style]}>
       	<View style={styles.container}>
-      		<MyText>{this.props.title} {this.props.selected}</MyText>
+      		<MyText style={{fontWeight:'500', fontSize:20}}>{this.props.title} {this.props.selected}</MyText>
       		<Image source={this.props.selected ? images['selected'] : images['unselected']}/>
       	</View>
       </TouchableOpacity>

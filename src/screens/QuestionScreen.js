@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import {FlatList, Image, View, Text, Button, StyleSheet} from 'react-native';
+import {TouchableOpacity, Image, View, Text, Button, StyleSheet} from 'react-native';
 import * as Progress from 'react-native-progress';
 import questions from '../data/questions';
 import MyText from '../components/MyText';
 import images from '../../img/images';
 import SelectButton from '../components/SelectButton';
+import CyanButton from '../components/CyanButton';
 
 const styles = StyleSheet.create({
  container: {
@@ -17,7 +18,16 @@ const styles = StyleSheet.create({
   },
   secondaryTheme: {
     color : '#f0f0f0' //gray'
-  }
+  }, 
+  button: {
+    backgroundColor: "rgba(255, 255, 255, 0.3)",
+    borderRadius: 10,
+    paddingVertical: 15,
+    alignItems: "center",
+    justifyContent: "center",
+    width: "46%",
+    marginTop: 20
+  },
 });
 
 function LogoTitle() {
@@ -43,6 +53,7 @@ function LogoTitle() {
 // 			);
 // 	}
 // }
+
 
 function QuestionScreen({route}) {
 	const { pageIndex } = route.params;
@@ -72,7 +83,7 @@ function QuestionScreen({route}) {
 				
 			</View>
 			
-			<Button title='continue'/>
+			<CyanButton title='Continue'/>
 		</View>
 	);
 }
