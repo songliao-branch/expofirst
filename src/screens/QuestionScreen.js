@@ -4,12 +4,13 @@ import * as Progress from 'react-native-progress';
 import questions from '../data/questions';
 import MyText from '../components/MyText';
 import images from '../../img/images';
+import SelectButton from '../components/SelectButton';
 
 const styles = StyleSheet.create({
  container: {
  	backgroundColor: 'white',
- 	flex:1,
- 	'alignItems':'center'
+ 	alignItems:'center',
+ 	height:'100%'
  },
   primaryTheme: {
     color: '#5cced8' //cyan
@@ -46,33 +47,32 @@ function LogoTitle() {
 function QuestionScreen({route}) {
 	const { pageIndex } = route.params;
 
-	const options = ['yes', 'no'];
-
-	const [option, setOption] = useState('')
+	const [selectedIndex, setSelectedIndex] = useState(-1)
 
 	const data = questions[pageIndex]
 
 	return (
 		<View style={styles.container}>
-
+			<LogoTitle/>
 			<Image source ={images[data.image]}/>
 			<MyText style={{fontWeight:'bold', fontSize:28}}>
-				{data.question}
+				{data.question} selected:{selectedIndex}
 			</MyText>
-			<FlatList 
-			data={options}
-			renderItem = { ({item, index}) => 
-			<Button title={item}
-			color={option == options[index] ? 'blue':'gray' }
-			onPress = {()=> 
-				setOption(option == item ? '' : item)
-			}
-			/>
-			}
-			/>
 
+			<View style={{width:'100%'}}>
+				{data.options.map( (option,index) => (
+                <SelectButton
+                  key={option.id}
+                  title={option.text}
+                  selected={selectedIndex == index}
+                  onPress={()=>
+                   setSelectedIndex(selectedIndex == index ? -1 :index)}
+                />
+              ))}
+				
+			</View>
+			
 			<Button title='continue'/>
-
 		</View>
 	);
 }

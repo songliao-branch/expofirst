@@ -4,7 +4,16 @@ import MyText from './MyText';
 const styles = StyleSheet.create({
   defaultStyle: {
   	backgroundColor: 'white',
-  	borderRadius:15
+  	borderRadius:15,
+  	borderBottomWidth:0,
+  	shadowColor: '#000',
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation:5,
+    marginLeft:5,
+    marginRight:5,
+    marginTop:5
   },
 });
 

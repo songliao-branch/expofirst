@@ -4,9 +4,9 @@ const questions = [
 	type:"radio",
 	image:"questionmark",
 	options: [
-		{id: "1", text:"Yes"},
-		{id: "2", text:"No"},
-	]
+      { id: "0", text: "Yes" },
+      { id: "1", text: "No" }
+    ]
 },
 {
 	question: "How old are you?",
@@ -19,9 +19,9 @@ const questions = [
 	type:"radio",
 	image:"",
 	options: [
-		{id: "1", text:"Female"},
-		{id: "2", text:"Male"},
-	]
+      { id: "0", text: "Female" },
+      { id: "1", text: "Male" }
+    ]
 }
 ];
 
