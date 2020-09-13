@@ -115,29 +115,26 @@ const HomeScreen = ({ navigation }) => {
           pageNumber: 0
       })
     }>
-      <Card>
-        <Image style={{width:'100%'}} source={require('../img/home_doctor.png')}
-        />
-        <MyText style={{fontSize:16, fontWeight:'bold'}}>Diabetes or Not? Check This Out</MyText>
-        <MyText style={{fontSize:15, paddingBottom:30}}>Subscribe specialized program to make you healthier</MyText>
+      <Card imageSource={require('../img/home_doctor.png')}
+      title='Diabetes or Not? Check This Out' 
+      subtitle='Subscribe specialized program to make you healthier'>
       </Card>
     </TouchableWithoutFeedback>
 
-    <Text>Challenges</Text>
+    <MyText style={{fontSize:22, fontWeight:'bold', paddingTop:40}}>Challenges</MyText>
+    
     <TouchableWithoutFeedback onPress={()=> 
       navigation.navigate('Details', {
         itemId: 0,
         other: 'whatever'
       })
     }>
-    <View>
-    { <Image source={require('../img/home_exercise.png')}
-    />}
-    <Text>Better Life from Health Food</Text>
-    <Text>Join this timed challenge for a chance to win an iPhone X!</Text>
-    
-    <Button style={{'justifyContent':'center'}}title='Get Started'/>
-    </View>
+
+    <Card imageSource={require('../img/home_exercise.png')}
+      title='Better Life from Healthy Food' 
+      subtitle='Join this timed challenge for a chance to win an iPhone 12!'>
+      <Button color='red' style={{'justifyContent':'center'}} title='Get Started'/>
+      </Card>
     </TouchableWithoutFeedback>
     
     
