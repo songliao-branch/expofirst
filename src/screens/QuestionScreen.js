@@ -58,6 +58,8 @@ function QuestionScreen({route, navigation}) {
 	const [selectedIndex, setSelectedIndex] = useState(-1)
 	const [alertShow, setAlertShow] = useState(false);
 
+	const [gender, setGender] = useState(-1);//-1:unselected, 0:female, 1:male
+
 	const data = questions[pageIndex]
 
 	function onSubmitted() {
@@ -77,15 +79,23 @@ function QuestionScreen({route, navigation}) {
 		})
 	}
 
-	return (
-		<View style={styles.container}>
-			
-			<Image source ={images[data.image]}/>
-			<MyText style={{fontWeight:'bold', fontSize:28}}>
-				{data.question}
-			</MyText>
+	function RenderSelections(props) {
+		switch (props.type) {
+			case 'radio_text':
+				return <RenderRadioText/>;
+			case 'radio_pic':
+				return <RenderGenderSelection/>;
+			case "scale_age":
+				return null;
+			case "scale_body":
+				return null;
+			default:
+				return null;
+		}
+	}
 
-			<View style={{width:'100%', paddingVertical:50}}>
+	function RenderRadioText() {
+		return (<View style={{width:'100%', paddingVertical:50}}>
 				{data.options.map( (option,index) => (
                 <SelectButton
                   key={option.id}
@@ -95,7 +105,55 @@ function QuestionScreen({route, navigation}) {
                    setSelectedIndex(selectedIndex == index ? -1 :index)}
                 />
               ))}
+			</View>);
+	}
+
+	function RenderGender(props) {
+		if (gender == 0) {
+			return (<Image source={images['female_selected']}/>);
+		} else if (gender == 1) {
+			return (<Image source={images['male_selected']}/>);
+		}
+		
+		return (<Image source={images[props.isFemale ?'female_unselected':'male_unselected']}/>);
+	}
+
+	function RenderFemale() {
+		if (gender == 0) {
+			return (<Image source={images['female_selected']}/>);
+		} 
+		return (<Image source={images['female_unselected']}/>);
+	}
+
+	function RenderMale() {
+		if (gender == 1) {
+			return (<Image source={images['male_selected']}/>);
+		} 
+		return (<Image source={images['male_unselected']}/>);
+	}
+
+	function RenderGenderSelection() {
+		return (
+			<View style={{flex:1, flexDirection:'row', justifyContent:'space-evenly'}}>
+				<TouchableOpacity onPress={()=>setGender(0)}>
+					<RenderFemale/>
+				</TouchableOpacity>
+				<TouchableOpacity onPress={()=>setGender(1)}>
+					<RenderMale/>
+				</TouchableOpacity>
 			</View>
+		);
+	}
+
+	return (
+		<View style={styles.container}>
+			
+			<Image source ={images[data.image]}/>
+			<MyText style={{fontWeight:'bold', fontSize:28}}>
+				{data.question}
+			</MyText>
+
+			<RenderSelections type={data.type}/>
 			
 			<CyanButton onPress={()=>
 				onSubmitted()

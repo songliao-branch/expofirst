@@ -45,7 +45,7 @@ const questions = [
 },
 {
 	question: "You weight and height",
-	type:"scale_small",
+	type:"scale_body",
 	image:"",
 	options: [
     ]
