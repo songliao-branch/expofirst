@@ -40,7 +40,7 @@ const Alert = (props) => {
     return (
       <View style={styles.container}>
         <View style={styles.rounded}>
-          <Text style={styles.alertText}>Below is simple 7 question test to understand your risk of getting diabetes. The test is developed by the American Diabetes Association. It will take around one minute to finish.</Text>
+          <Text style={styles.alertText}>{props.title}</Text>
           <CyanButton title='OK' onPress={props.onPress}/>
         </View>
       </View>

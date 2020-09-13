@@ -7,6 +7,7 @@ import images from '../../img/images';
 import SelectButton from '../components/SelectButton';
 import CyanButton from '../components/CyanButton';
 import Alert from '../components/Alert';
+import alerts from '../data/alerts';
 
 const styles = StyleSheet.create({
  container: {
@@ -59,7 +60,7 @@ function QuestionScreen({route, navigation}) {
 
 	const data = questions[pageIndex]
 
-	function submitted() {
+	function onSubmitted() {
 		if (pageIndex == 0) {
 			setAlertShow(true);
 		} else {
@@ -97,9 +98,11 @@ function QuestionScreen({route, navigation}) {
 			</View>
 			
 			<CyanButton onPress={()=>
-				submitted()
+				onSubmitted()
 			} title='Continue'/>
-			<Alert visible={alertShow} onPress={()=>
+			<Alert 
+				title={alerts['start']}
+				visible={alertShow} onPress={()=>
 				onAlertClosed()
 			}/>
 		</View>
