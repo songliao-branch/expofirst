@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {TouchableOpacity, Image, View, Text, Button, StyleSheet} from 'react-native';
-import * as Progress from 'react-native-progress';
+
 import questions from '../data/questions';
 import MyText from '../components/MyText';
 import images from '../../img/images';
@@ -32,13 +32,6 @@ const styles = StyleSheet.create({
   },
 });
 
-function LogoTitle() {
-  return (
-    <Progress.Bar progress={0.1} width={200}
-    height ={6} color={styles.primaryTheme.color} unfilledColor={styles.secondaryTheme.color} borderWidth={0} /> 
-    );
-}
-
 // class QuestionScreen extends React.Component {
 // 	static navigationOptions = {
 //    	 title: 'Home',
@@ -66,7 +59,7 @@ function QuestionScreen({route, navigation}) {
 
 	return (
 		<View style={styles.container}>
-			<LogoTitle/>
+			
 			<Image source ={images[data.image]}/>
 			<MyText style={{fontWeight:'bold', fontSize:28}}>
 				{data.question}

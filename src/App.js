@@ -11,33 +11,13 @@ import UserBar from './components/UserBar';
 import {TouchableWithoutFeedback, TouchableOpacity, ScrollView, FlatList,StyleSheet, SafeAreaView, Text,TextInput,View, Button, Image} from 'react-native';
 import QuestionScreen from './screens/QuestionScreen';
 import images from '../img/images';
+import questions from './data/questions';
 
 const Stack = createStackNavigator();
-const QuestionContext = React.createContext();
-
-var questionPageIndex = 0;
 
 const App = () => {
-  const questions=[
-  {
-    pageNumber:0,
-    progress: 0.5,
-    type: 'options',
-    question:'Have you been diagnosed with diabetes',
-    options:['yes','no'],
-    selected:-1
-  },
-  {
-    pageNumber:1,
-    progress: 0.2,
-    type: 'options',
-    question:'You are..',
-    options:['Female','Male'],
-    selected:-1
-  }];
 
   return (
-    <QuestionContext.Provider value={{questions}}>
       <NavigationContainer>
       <Stack.Navigator initialRouteName='Home'
         screenOptions={{
@@ -45,8 +25,15 @@ const App = () => {
           headerBackImage: ()=>(<GoBack/>),
           headerLeftContainerStyle: {
                         alignItems: "flex-start",
-                        paddingHorizontal: 25
+                        paddingLeft: 25
             },
+          headerTitle: ()=>(<ProgressBar/>),
+          headerRight: ()=>(<HeaderRight/>),
+           headerRightContainerStyle: {
+                        alignItems: "flex-end",
+                        paddingRight: 25
+            },
+
         }}
       > 
 
@@ -73,9 +60,7 @@ const App = () => {
       />
       </Stack.Navigator>
     {/* Rest of your app code */}
-    </NavigationContainer>
-  </QuestionContext.Provider>
-    
+    </NavigationContainer>    
   );
 };
 
@@ -85,20 +70,20 @@ function GoBack() {
     );
 }
 
-function HeaderRight() {
+function ProgressBar() {
   return (
-      <Text>number/8</Text>
+    <Progress.Bar progress={0.5} width={200}
+    height ={6} color={styles.primaryTheme.color} unfilledColor={styles.secondaryTheme.color} borderWidth={0} /> 
     );
 }
 
-// function LogoTitle() {
-//   const {questions} = React.useContext(QuestionContext);
+function HeaderRight() {
+  return (
+      <Text>0/{questions.length}</Text>
+    );
+}
 
-//   return (
-//     <Progress.Bar progress={questions[questionPageIndex].progress} width={200}
-//     height ={6} color={styles.primaryTheme.color} unfilledColor={styles.secondaryTheme.color} borderWidth={0} /> 
-//     );
-// }
+
 
 const HomeScreen = ({ navigation }) => {
   return (
@@ -142,7 +127,6 @@ const HomeScreen = ({ navigation }) => {
 
     );
 };
-
 
 
 function ProfileScreen({route}) {
