@@ -2,7 +2,6 @@ import React from 'react';
 import {Text, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  // ... add your default style here
   defaultStyle: {
   	color: 'rgba(71,83,89,1)',
   	paddingHorizontal:20,

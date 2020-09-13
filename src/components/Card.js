@@ -2,7 +2,6 @@ import React from 'react';
 import {View, StyleSheet, Image} from 'react-native';
 import MyText from './MyText';
 const styles = StyleSheet.create({
-  // ... add your default style here
   defaultStyle: {
   	backgroundColor: 'white',
   	borderRadius:15

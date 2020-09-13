@@ -2,7 +2,7 @@ const questions = [
 {
 	question: "Have you been diagnosed with diabetes?",
 	type:"radio",
-	image:"",
+	image:"questionmark",
 	options: [
 		{id: "1", text:"Yes"},
 		{id: "2", text:"No"},

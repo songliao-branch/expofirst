@@ -5,10 +5,11 @@ import {createStackNavigator }from '@react-navigation/stack';
 import * as Progress from 'react-native-progress';
 import MyText from './components/MyText';
 import Card from './components/Card';
+import UserBar from './components/UserBar';
 
 // import React, { Component,useState } from 'react';
-import {TouchableWithoutFeedback, ScrollView, FlatList,StyleSheet, SafeAreaView, Text,TextInput,View, Button, Image} from 'react-native';
-import QuestionPage from './QuestionPage';
+import {TouchableWithoutFeedback, TouchableOpacity, ScrollView, FlatList,StyleSheet, SafeAreaView, Text,TextInput,View, Button, Image} from 'react-native';
+import QuestionScreen from './screens/QuestionScreen';
 
 const Stack = createStackNavigator();
 const QuestionContext = React.createContext();
@@ -57,12 +58,12 @@ const App = () => {
       />
 
       <Stack.Screen
-      name='QuestionPage'
-      component={QuestionPage}
-      options={{ 
-        headerTitle: (props) => <LogoTitle {...props} />,
-        headerRight: () => <HeaderRight/>
-      }}
+      name='QuestionScreen'
+      component={QuestionScreen}
+      // options={{ 
+      //   headerTitle: (props) => <LogoTitle {...props} />,
+      //   headerRight: () => <HeaderRight/>
+      // }}
       />
       </Stack.Navigator>
     {/* Rest of your app code */}
@@ -72,58 +73,45 @@ const App = () => {
   );
 };
 
-function HeaderRight() {
-  return (
-      <Text>number/8</Text>
-    );
-}
+// function HeaderRight() {
+//   return (
+//       <Text>number/8</Text>
+//     );
+// }
 
-function LogoTitle() {
-  const {questions} = React.useContext(QuestionContext);
+// function LogoTitle() {
+//   const {questions} = React.useContext(QuestionContext);
 
-  return (
-
-    <Progress.Bar progress={questions[questionPageIndex].progress} width={200}
-    height ={6} color={styles.primaryTheme.color} unfilledColor={styles.secondaryTheme.color} borderWidth={0} /> 
-    );
-}
-
-const UserBar = ()=> {
-  return (
-    <View style={{flex:1, flexDirection: 'row', justifyContent:'space-between', paddingBottom:50}}> 
-      <View>
-        <Text>Wecome Back</Text>
-        <Text>Jason</Text>
-      </View>
-      <Text>Profile Image</Text>
-    </View>
-    );
-}
+//   return (
+//     <Progress.Bar progress={questions[questionPageIndex].progress} width={200}
+//     height ={6} color={styles.primaryTheme.color} unfilledColor={styles.secondaryTheme.color} borderWidth={0} /> 
+//     );
+// }
 
 const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container} >
     <ScrollView>
-    <UserBar/>
+    <UserBar username='Jason' imageSource={require('../img/jason.png')}/>
 
-    <TouchableWithoutFeedback onPress={()=> 
+    <TouchableOpacity onPress={()=> 
       // navigation.navigate('Details', {
       //   itemId: 0,
       //   other: 'whatever'
       // })
-      navigation.navigate('QuestionPage', {
-          pageNumber: 0
+      navigation.navigate('QuestionScreen', {
+          pageIndex: 0
       })
     }>
       <Card imageSource={require('../img/home_doctor.png')}
       title='Diabetes or Not? Check This Out' 
       subtitle='Subscribe specialized program to make you healthier'>
       </Card>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
 
     <MyText style={{fontSize:22, fontWeight:'bold', paddingTop:40}}>Challenges</MyText>
     
-    <TouchableWithoutFeedback onPress={()=> 
+    <TouchableOpacity onPress={()=> 
       navigation.navigate('Details', {
         itemId: 0,
         other: 'whatever'
@@ -135,11 +123,9 @@ const HomeScreen = ({ navigation }) => {
       subtitle='Join this timed challenge for a chance to win an iPhone 12!'>
       <Button color='red' style={{'justifyContent':'center'}} title='Get Started'/>
       </Card>
-    </TouchableWithoutFeedback>
-    
+    </TouchableOpacity>
     
     </ScrollView>
-
     </View>
 
     );
