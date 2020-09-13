@@ -81,7 +81,7 @@ function ProgressBar(props) {
 
 function HeaderRight(props) {
   return (
-      <Text>{props.pageIndex}/{questions.length}</Text>
+      <Text>{props.pageIndex}/{questions.length-1}</Text>
     );
 }
 
