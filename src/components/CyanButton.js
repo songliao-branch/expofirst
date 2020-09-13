@@ -4,23 +4,17 @@ import MyText from './MyText';
 
 
 const styles = StyleSheet.create({
- MainContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#F5FCFF',
-  },
- 
   SubmitButtonStyle: {
     marginTop:10,
     paddingTop:15,
     paddingBottom:15,
     marginLeft:30,
     marginRight:30,
+    marginBottom:80,
     backgroundColor:'#00BCD4',
     borderRadius:40,
     borderWidth: 0,
     width:'70%',
-    borderColor: '#fff'
   },
  
   TextStyle:{

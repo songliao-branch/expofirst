@@ -11,7 +11,9 @@ const styles = StyleSheet.create({
  container: {
  	backgroundColor: 'white',
  	alignItems:'center',
- 	height:'100%'
+ 	height:'100%',
+ 	flex:1,
+ 	justifyContent:'space-between'
  },
   primaryTheme: {
     color: '#5cced8' //cyan
@@ -55,7 +57,7 @@ function LogoTitle() {
 // }
 
 
-function QuestionScreen({route}) {
+function QuestionScreen({route, navigation}) {
 	const { pageIndex } = route.params;
 
 	const [selectedIndex, setSelectedIndex] = useState(-1)
@@ -67,10 +69,10 @@ function QuestionScreen({route}) {
 			<LogoTitle/>
 			<Image source ={images[data.image]}/>
 			<MyText style={{fontWeight:'bold', fontSize:28}}>
-				{data.question} selected:{selectedIndex}
+				{data.question}
 			</MyText>
 
-			<View style={{width:'100%'}}>
+			<View style={{width:'100%', paddingVertical:50}}>
 				{data.options.map( (option,index) => (
                 <SelectButton
                   key={option.id}
@@ -80,10 +82,13 @@ function QuestionScreen({route}) {
                    setSelectedIndex(selectedIndex == index ? -1 :index)}
                 />
               ))}
-				
 			</View>
 			
-			<CyanButton title='Continue'/>
+			<CyanButton onPress={()=>
+				navigation.push('QuestionScreen', {
+					pageIndex: pageIndex + 1
+				})
+			} title='Continue'/>
 		</View>
 	);
 }

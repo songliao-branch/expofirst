@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     elevation:5,
     marginLeft:15,
     marginRight:15,
-    marginTop:5,
+    marginTop:25,
     height:100,
     width:'90%'
   },
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     elevation:5,
     marginLeft:15,
     marginRight:15,
-    marginTop:5,
+    marginTop:25,
     height:100,
     width:'90%'
   },

@@ -5,7 +5,7 @@ const questions = [
 	image:"questionmark",
 	options: [
       { id: "0", text: "Yes" },
-      { id: "1", text: "No" }
+      { id: "1", text: "No" },
     ]
 },
 {
