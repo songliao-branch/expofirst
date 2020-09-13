@@ -85,8 +85,6 @@ function HeaderRight(props) {
     );
 }
 
-
-
 const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container} >

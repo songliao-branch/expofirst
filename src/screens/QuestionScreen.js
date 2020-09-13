@@ -6,6 +6,7 @@ import MyText from '../components/MyText';
 import images from '../../img/images';
 import SelectButton from '../components/SelectButton';
 import CyanButton from '../components/CyanButton';
+import Alert from '../components/Alert';
 
 const styles = StyleSheet.create({
  container: {
@@ -54,8 +55,26 @@ function QuestionScreen({route, navigation}) {
 	const { pageIndex } = route.params;
 
 	const [selectedIndex, setSelectedIndex] = useState(-1)
+	const [alertShow, setAlertShow] = useState(false);
 
 	const data = questions[pageIndex]
+
+	function submitted() {
+		if (pageIndex == 0) {
+			setAlertShow(true);
+		} else {
+			navigation.push('QuestionScreen', {
+				pageIndex: pageIndex + 1
+			})
+		}
+	}
+
+	function onAlertClosed() {
+		setAlertShow(false);
+		navigation.push('QuestionScreen', {
+			pageIndex: pageIndex + 1
+		})
+	}
 
 	return (
 		<View style={styles.container}>
@@ -78,10 +97,11 @@ function QuestionScreen({route, navigation}) {
 			</View>
 			
 			<CyanButton onPress={()=>
-				navigation.push('QuestionScreen', {
-					pageIndex: pageIndex + 1
-				})
+				submitted()
 			} title='Continue'/>
+			<Alert visible={alertShow} onPress={()=>
+				onAlertClosed()
+			}/>
 		</View>
 	);
 }
