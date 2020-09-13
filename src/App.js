@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler';
-import * as React from 'react';
+import React, {useState} from 'react';
+
 import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator }from '@react-navigation/stack';
 import * as Progress from 'react-native-progress';
@@ -16,6 +17,7 @@ import questions from './data/questions';
 const Stack = createStackNavigator();
 
 const App = () => {
+  const [pageIndex, setPageIndex] = useState(0);
 
   return (
       <NavigationContainer>
@@ -27,8 +29,8 @@ const App = () => {
                         alignItems: "flex-start",
                         paddingLeft: 25
             },
-          headerTitle: ()=>(<ProgressBar/>),
-          headerRight: ()=>(<HeaderRight/>),
+          headerTitle: ()=>(<ProgressBar pageIndex={pageIndex}/>),
+          headerRight: ()=>(<HeaderRight pageIndex={pageIndex}/>),
            headerRightContainerStyle: {
                         alignItems: "flex-end",
                         paddingRight: 25
@@ -70,16 +72,16 @@ function GoBack() {
     );
 }
 
-function ProgressBar() {
+function ProgressBar(props) {
   return (
-    <Progress.Bar progress={0.5} width={200}
+    <Progress.Bar progress={props.pageIndex/questions.length} width={200}
     height ={6} color={styles.primaryTheme.color} unfilledColor={styles.secondaryTheme.color} borderWidth={0} /> 
     );
 }
 
-function HeaderRight() {
+function HeaderRight(props) {
   return (
-      <Text>0/{questions.length}</Text>
+      <Text>{props.pageIndex}/{questions.length}</Text>
     );
 }
 
