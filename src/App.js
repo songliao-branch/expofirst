@@ -3,6 +3,8 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator }from '@react-navigation/stack';
 import * as Progress from 'react-native-progress';
+import MyText from './components/MyText';
+import Card from './components/Card';
 
 // import React, { Component,useState } from 'react';
 import {TouchableWithoutFeedback, ScrollView, FlatList,StyleSheet, SafeAreaView, Text,TextInput,View, Button, Image} from 'react-native';
@@ -88,7 +90,7 @@ function LogoTitle() {
 
 const UserBar = ()=> {
   return (
-    <View style={{flex:1, flexDirection: 'row', justifyContent:'space-between'}}> 
+    <View style={{flex:1, flexDirection: 'row', justifyContent:'space-between', paddingBottom:50}}> 
       <View>
         <Text>Wecome Back</Text>
         <Text>Jason</Text>
@@ -113,12 +115,12 @@ const HomeScreen = ({ navigation }) => {
           pageNumber: 0
       })
     }>
-    <View>
-    <Image source={require('../img/home_doctor.png')}
-    />
-    <Text style={styles.apptext}>Diabetes or Not? Check This Out</Text>
-    <Text>Subscribe specialized program to make you healthier</Text>
-    </View>
+      <Card>
+        <Image style={{width:'100%'}} source={require('../img/home_doctor.png')}
+        />
+        <MyText style={{fontSize:16, fontWeight:'bold'}}>Diabetes or Not? Check This Out</MyText>
+        <MyText style={{fontSize:15, paddingBottom:30}}>Subscribe specialized program to make you healthier</MyText>
+      </Card>
     </TouchableWithoutFeedback>
 
     <Text>Challenges</Text>
@@ -182,7 +184,8 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop:22,
     paddingLeft:15,
-    paddingRight:15
+    paddingRight:15,
+    color:'rgb(242,242,242)'
   },
   item: {
     padding: 10,
