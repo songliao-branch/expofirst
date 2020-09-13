@@ -10,6 +10,7 @@ import UserBar from './components/UserBar';
 // import React, { Component,useState } from 'react';
 import {TouchableWithoutFeedback, TouchableOpacity, ScrollView, FlatList,StyleSheet, SafeAreaView, Text,TextInput,View, Button, Image} from 'react-native';
 import QuestionScreen from './screens/QuestionScreen';
+import images from '../img/images';
 
 const Stack = createStackNavigator();
 const QuestionContext = React.createContext();
@@ -38,7 +39,16 @@ const App = () => {
   return (
     <QuestionContext.Provider value={{questions}}>
       <NavigationContainer>
-      <Stack.Navigator initialRouteName='Home'> 
+      <Stack.Navigator initialRouteName='Home'
+        screenOptions={{
+          headerBackTitleVisible: false,
+          headerBackImage: ()=>(<GoBack/>),
+          headerLeftContainerStyle: {
+                        alignItems: "flex-start",
+                        paddingHorizontal: 25
+            },
+        }}
+      > 
 
       <Stack.Screen
       name='Profile'
@@ -59,11 +69,7 @@ const App = () => {
 
       <Stack.Screen
       name='QuestionScreen'
-      component={QuestionScreen}
-      // options={{ 
-      //   headerTitle: (props) => <LogoTitle {...props} />,
-      //   headerRight: () => <HeaderRight/>
-      // }}
+      component={QuestionScreen}  
       />
       </Stack.Navigator>
     {/* Rest of your app code */}
@@ -73,11 +79,17 @@ const App = () => {
   );
 };
 
-// function HeaderRight() {
-//   return (
-//       <Text>number/8</Text>
-//     );
-// }
+function GoBack() {
+  return (
+    <Image width={20} height={20} source={images['back']}/>
+    );
+}
+
+function HeaderRight() {
+  return (
+      <Text>number/8</Text>
+    );
+}
 
 // function LogoTitle() {
 //   const {questions} = React.useContext(QuestionContext);
