@@ -17,49 +17,45 @@ import questions from './data/questions';
 const Stack = createStackNavigator();
 
 const App = () => {
-  const [pageIndex, setPageIndex] = useState(0);
+  const [questionIndex, setQuestionIndex] = useState(0);
 
   return (
       <NavigationContainer>
       <Stack.Navigator initialRouteName='Home'
-        screenOptions={{
-          headerBackTitleVisible: false,
-          headerBackImage: ()=>(<GoBack/>),
-          headerLeftContainerStyle: {
-                        alignItems: "flex-start",
-                        paddingLeft: 25
-            },
-          headerTitle: ()=>(<ProgressBar pageIndex={pageIndex}/>),
-          headerRight: ()=>(<HeaderRight pageIndex={pageIndex}/>),
-           headerRightContainerStyle: {
-                        alignItems: "flex-end",
-                        paddingRight: 25
-            },
-
-        }}
       > 
-
-      <Stack.Screen
-      name='Profile'
-      component={ProfileScreen}
-      options={({route}) => ({title: route.params.name})}
-      />
-
       <Stack.Screen 
       name='Home'
       component={HomeScreen}
       options={{title:''}}
       />
-
-      <Stack.Screen
-      name='Details'
-      component={DetailsScreen}
-      />
-
       <Stack.Screen
       name='QuestionScreen'
       component={QuestionScreen}  
-      />
+      options={({ navigation }) => ({
+        
+        headerBackTitleVisible: false,
+          headerBackImage: ()=>(<GoBack/>),
+          headerLeftContainerStyle: {
+                        alignItems: "flex-start",
+                        paddingLeft: 25
+            },
+          headerTitle: ()=>(<ProgressBar pageIndex={questionIndex}/>),
+          headerRight: ()=>(<HeaderRight pageIndex={questionIndex}/>),
+           headerRightContainerStyle: {
+                        alignItems: "flex-end",
+                        paddingRight: 25
+            },
+      })}
+    />
+    <Stack.Screen
+          name='Profile'
+          component={ProfileScreen}
+          options={({route}) => ({title: route.params.name})}
+          />
+    <Stack.Screen
+          name='Details'
+          component={DetailsScreen}
+          />
       </Stack.Navigator>
     {/* Rest of your app code */}
     </NavigationContainer>    
