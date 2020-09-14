@@ -66,14 +66,16 @@ function QuestionScreen({route, navigation}) {
 		if (pageIndex == 0) {
 			setAlertShow(true);
 		} else {
-			navigation.push('QuestionScreen', {
-				pageIndex: pageIndex + 1
-			})
+			goToNextScreen();
 		}
 	}
 
 	function onAlertClosed() {
 		setAlertShow(false);
+		goToNextScreen();
+	}
+
+	function goToNextScreen() {
 		navigation.push('QuestionScreen', {
 			pageIndex: pageIndex + 1
 		})
