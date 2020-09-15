@@ -4,6 +4,7 @@ import Card from '../components/Card';
 import UserBar from '../components/UserBar';
 import images from '../../img/images';
 import {TouchableOpacity, ScrollView,StyleSheet,View, Button} from 'react-native';
+import ChallengeScreen from "./ChallengeScreen";
 
 const styles = StyleSheet.create({
     container: {
@@ -37,10 +38,7 @@ const HomeScreen = ({navigation}) => {
       <MyText style={{fontSize:22, fontWeight:'bold', paddingTop:40}}>Challenges</MyText>
       
       <TouchableOpacity onPress={()=> 
-        navigation.navigate('Details', {
-          itemId: 0,
-          other: 'whatever'
-        })
+        navigation.push('ChallengeScreen')
       }>
   
       <Card imageSource={images['home_exercise']}

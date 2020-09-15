@@ -10,6 +10,7 @@ import QuestionScreen from './screens/QuestionScreen';
 import HomeScreen from './screens/HomeScreen';
 import questions from './data/questions';
 import images from '../img/images';
+import ChallengeScreen from './screens/ChallengeScreen';
 
 const Stack = createStackNavigator();
 
@@ -20,9 +21,16 @@ const App = () => {
       <NavigationContainer>
       <Stack.Navigator initialRouteName='Home'
       > 
+     
+
       <Stack.Screen 
-      name='Home'
+      name='HomeScreen'
       component={HomeScreen}
+      options={{title:''}}
+      />
+        <Stack.Screen 
+      name='ChallengeScreen'
+      component={ChallengeScreen}
       options={{title:''}}
       />
       <Stack.Screen
@@ -52,6 +60,7 @@ const App = () => {
        questionIndex={questionIndex}
        setQuestionIndex ={setQuestionIndex}/>}   
     </Stack.Screen>
+   
    
       </Stack.Navigator>
     {/* Rest of your app code */}
