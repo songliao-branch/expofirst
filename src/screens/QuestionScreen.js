@@ -12,7 +12,7 @@ import alerts from '../data/alerts';
 const styles = StyleSheet.create({
  container: {
  	backgroundColor: 'white',
- 	alignItems:'center',
+ 	alignItems:'flex-start',
  	height:'100%',
  	flex:1,
  	justifyContent:'space-between'
@@ -34,36 +34,19 @@ const styles = StyleSheet.create({
   },
 });
 
-// class QuestionScreen extends React.Component {
-// 	static navigationOptions = {
-//    	 title: 'Home',
-//  	 };
 
-// 	render() {
-// 		const {navigation} = this.props;
-// 		const pageIndex = navigation.getParam('pageIndex', 0)
-
-// 		return (
-// 			<View>
-// 				<Text>questions[pageIndex].question</Text>
-// 			</View>
-// 			);
-// 	}
-// }
-
-
-function QuestionScreen({route, navigation}) {
-	const { pageIndex } = route.params;
+function QuestionScreen({questionIndex, setQuestionIndex, route, navigation}) {
+	// const { questionIndex, setQuestionIndex } = route.params;
 
 	const [selectedIndex, setSelectedIndex] = useState(-1)
 	const [alertShow, setAlertShow] = useState(false);
 
 	const [gender, setGender] = useState(-1);//-1:unselected, 0:female, 1:male
 
-	const data = questions[pageIndex]
+	const data = questions[questionIndex]
 
 	function onSubmitted() {
-		if (pageIndex == 0) {
+		if (questionIndex == 0) {
 			setAlertShow(true);
 		} else {
 			goToNextScreen();
@@ -76,13 +59,21 @@ function QuestionScreen({route, navigation}) {
 	}
 
 	function goToNextScreen() {
-		navigation.push('QuestionScreen', {
-			pageIndex: pageIndex + 1
-		})
+		setQuestionIndex(questionIndex + 1)
+		navigation.push('QuestionScreen')
+		// navigation.navigate('QuestionScreen', {
+		// 	questionIndex: {questionIndex},
+		// 	setQuestionIndex: {setQuestionIndex}
+		// })
 	}
 
-	function RenderSelections(props) {
-		switch (props.type) {
+	const RenderLabel = () => 
+		<MyText style={{justifyContent:'center',paddingTop:35, fontWeight:'bold', fontSize:28}}>
+				{data.question}
+		</MyText>;
+	
+	const RenderSelections= ({type}) => {
+		switch (type) {
 			case 'radio_text':
 				return <RenderRadioText/>;
 			case 'radio_pic':
@@ -96,7 +87,7 @@ function QuestionScreen({route, navigation}) {
 		}
 	}
 
-	function RenderRadioText() {
+	const RenderRadioText= () => {
 		return (<View style={{width:'100%', paddingVertical:50}}>
 				{data.options.map( (option,index) => (
                 <SelectButton
@@ -110,7 +101,7 @@ function QuestionScreen({route, navigation}) {
 			</View>);
 	}
 
-	function RenderGender(props) {
+	const RenderGender =() => {
 		if (gender == 0) {
 			return (<Image source={images['female_selected']}/>);
 		} else if (gender == 1) {
@@ -136,7 +127,7 @@ function QuestionScreen({route, navigation}) {
 
 	function RenderGenderSelection() {
 		return (
-			<View style={{flex:1, flexDirection:'row', justifyContent:'space-evenly'}}>
+			<View style={{flex:1, flexDirection:'row', alignItems:'center'}}>
 				<TouchableOpacity onPress={()=>setGender(0)}>
 					<RenderFemale/>
 				</TouchableOpacity>
@@ -151,9 +142,7 @@ function QuestionScreen({route, navigation}) {
 		<View style={styles.container}>
 			
 			<Image source ={images[data.image]}/>
-			<MyText style={{fontWeight:'bold', fontSize:28}}>
-				{data.question}
-			</MyText>
+			<RenderLabel/>
 
 			<RenderSelections type={data.type}/>
 			

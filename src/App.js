@@ -2,13 +2,12 @@ import 'react-native-gesture-handler';
 import React, {useState} from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
-import {createStackNavigator }from '@react-navigation/stack';
+import {createStackNavigator, HeaderBackButton }from '@react-navigation/stack';
 import * as Progress from 'react-native-progress';
 import MyText from './components/MyText';
 import Card from './components/Card';
 import UserBar from './components/UserBar';
 
-// import React, { Component,useState } from 'react';
 import {TouchableWithoutFeedback, TouchableOpacity, ScrollView, FlatList,StyleSheet, SafeAreaView, Text,TextInput,View, Button, Image} from 'react-native';
 import QuestionScreen from './screens/QuestionScreen';
 import images from '../img/images';
@@ -29,12 +28,16 @@ const App = () => {
       options={{title:''}}
       />
       <Stack.Screen
-      name='QuestionScreen'
-      component={QuestionScreen}  
+      name='QuestionScreen' 
       options={({ navigation }) => ({
-        
+
         headerBackTitleVisible: false,
-          headerBackImage: ()=>(<GoBack/>),
+          headerLeft: ()=> (<BackButton
+            navigation={navigation}
+            questionIndex={questionIndex}
+            setQuestionIndex={setQuestionIndex}
+          />
+          ),
           headerLeftContainerStyle: {
                         alignItems: "flex-start",
                         paddingLeft: 25
@@ -46,7 +49,11 @@ const App = () => {
                         paddingRight: 25
             },
       })}
-    />
+    >
+      {props => <QuestionScreen {...props}
+       questionIndex={questionIndex}
+       setQuestionIndex ={setQuestionIndex}/>}   
+    </Stack.Screen>
     <Stack.Screen
           name='Profile'
           component={ProfileScreen}
@@ -62,11 +69,24 @@ const App = () => {
   );
 };
 
-function GoBack() {
-  return (
-    <Image width={20} height={20} source={images['back']}/>
-    );
+function goBack(questionIndex, setQuestionIndex, navigation) {
+    setQuestionIndex(questionIndex - 1)
+    navigation.goBack()
 }
+
+function BackButton({questionIndex, setQuestionIndex, navigation}) {
+  return (<HeaderBackButton onPress={
+    ()=> goBack(questionIndex, setQuestionIndex, navigation) }
+  />)
+}
+
+// function GoBack({questionIndex, setQuestionIndex}) {
+//   return (
+//     <TouchableOpacity onPress={()=> setQuestionIndex(questionIndex-1)}>
+//       <Image width={20} height={20} source={images['back']}/>
+//     </TouchableOpacity>
+//     );
+// }
 
 function ProgressBar(props) {
   return (
@@ -80,8 +100,8 @@ function HeaderRight(props) {
       <Text>{props.pageIndex}/{questions.length-1}</Text>
     );
 }
+const HomeScreen = ({navigation}) => {
 
-const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container} >
     <ScrollView>
@@ -92,9 +112,7 @@ const HomeScreen = ({ navigation }) => {
       //   itemId: 0,
       //   other: 'whatever'
       // })
-      navigation.navigate('QuestionScreen', {
-          pageIndex: 0
-      })
+      navigation.push('QuestionScreen')
     }>
       <Card imageSource={require('../img/home_doctor.png')}
       title='Diabetes or Not? Check This Out' 
