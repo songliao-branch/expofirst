@@ -9,6 +9,9 @@ const images = {
  female_selected: require("./female_selected.png"),
  man: require("./man.png"),
  woman: require("./woman.png"),
- tracker: require("./tracker.png")
+ tracker: require("./tracker.png"),
+ jason: require("./jason.png"),
+ home_doctor: require("./home_doctor.png"),
+ home_exercise: require("./home_exercise.png")
 }
 export default images;

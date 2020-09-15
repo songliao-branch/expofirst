@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator, HeaderBackButton }from '@react-navigation/stack';
 import * as Progress from 'react-native-progress';
 
-import {TouchableWithoutFeedback, TouchableOpacity, ScrollView, FlatList,StyleSheet, SafeAreaView, Text,TextInput,View, Button, Image} from 'react-native';
+import {TouchableOpacity, ScrollView, FlatList,StyleSheet, SafeAreaView, Text,TextInput,View, Button, Image} from 'react-native';
 import QuestionScreen from './screens/QuestionScreen';
 import HomeScreen from './screens/HomeScreen';
 
@@ -63,7 +63,6 @@ function goBack(questionIndex, setQuestionIndex, navigation) {
     if(questionIndex > 0) {
       setQuestionIndex(questionIndex - 1)
     }
-  
     navigation.goBack()
 }
 
@@ -76,7 +75,7 @@ function BackButton({questionIndex, setQuestionIndex, navigation}) {
 const ProgressBar = ({pageIndex}) => {
   if(pageIndex == 0) return null;
   return (
-    <Progress.Bar progress={pageIndex/questions.length} width={200}
+    <Progress.Bar progress={pageIndex/(questions.length-1)} width={200}
     height ={6} color={styles.primaryTheme.color} unfilledColor={styles.secondaryTheme.color} borderWidth={0} /> 
     );
 }
@@ -87,8 +86,6 @@ const HeaderRight = ({pageIndex}) => {
       <Text>{pageIndex}/{questions.length-1}</Text>
     );
 }
-
-
 
 
 const styles = StyleSheet.create({

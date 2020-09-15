@@ -1,8 +1,8 @@
+import React from 'react';
 import MyText from '../components/MyText';
 import Card from '../components/Card';
 import UserBar from '../components/UserBar';
 import images from '../../img/images';
-
 import {TouchableOpacity, ScrollView,StyleSheet,View, Button} from 'react-native';
 
 const styles = StyleSheet.create({
@@ -23,16 +23,12 @@ const HomeScreen = ({navigation}) => {
     return (
       <View style={styles.container} >
       <ScrollView>
-      <UserBar username='Jason' imageSource={require('../img/jason.png')}/>
+      <UserBar username='Jason' imageSource={images['jason']}/>
   
       <TouchableOpacity onPress={()=> 
-        // navigation.navigate('Details', {
-        //   itemId: 0,
-        //   other: 'whatever'
-        // })
         navigation.push('QuestionScreen')
       }>
-        <Card imageSource={require('../img/home_doctor.png')}
+        <Card imageSource={images['home_doctor']}
         title='Diabetes or Not? Check This Out' 
         subtitle='Subscribe specialized program to make you healthier'>
         </Card>
@@ -47,7 +43,7 @@ const HomeScreen = ({navigation}) => {
         })
       }>
   
-      <Card imageSource={require('../img/home_exercise.png')}
+      <Card imageSource={images['home_exercise']}
         title='Better Life from Healthy Food' 
         subtitle='Join this timed challenge for a chance to win an iPhone 12!'>
         <Button color='red' style={{'justifyContent':'center'}} title='Get Started'/>
