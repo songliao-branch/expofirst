@@ -9,30 +9,40 @@ import CyanButton from '../components/CyanButton';
 import Alert from '../components/Alert';
 import alerts from '../data/alerts';
 import Slider from '@react-native-community/slider';
+import MySlider from "../components/MySlider";
 
 const styles = StyleSheet.create({
- container: {
- 	backgroundColor: 'white',
- 	alignItems:'center',
- 	height:'100%',
- 	
- 	justifyContent:'space-between'
+ container: { 
+ 	  backgroundColor: 'white',
+	  height:'100%',
+	  justifyContent:'space-between'
+ },
+ topContainer:{
+	width:'100%',
+	top:15
+ },
+ imageContainer: {
+	alignItems:'center',
+	width:'100%'
+ },
+
+ genderContainer: {
+	alignItems:'center',
+	width:'100%',
+	justifyContent:'center',
+	height:550,
+ },
+ 
+ bottomContainer: {
+	width: '100%',
+	alignItems:'center',
  },
   primaryTheme: {
     color: '#5cced8' //cyan
   },
   secondaryTheme: {
     color : '#f0f0f0' //gray'
-  }, 
-  button: {
-    backgroundColor: "rgba(255, 255, 255, 0.3)",
-    borderRadius: 10,
-    paddingVertical: 15,
-    alignItems: "center",
-    justifyContent: "center",
-    width: "46%",
-    marginTop: 20
-  },
+  }
 });
 
 function QuestionScreen({questionIndex, setQuestionIndex, route, navigation}) {
@@ -74,7 +84,7 @@ function QuestionScreen({questionIndex, setQuestionIndex, route, navigation}) {
 			case 'radio_pic':
 				return <RenderGenderSelection/>;
 			case "scale_age":
-				return null;
+				return <MySlider/>;
 			case "scale_body":
 				return <RenderBodyMetrics/>;
 			default:
@@ -101,7 +111,7 @@ function QuestionScreen({questionIndex, setQuestionIndex, route, navigation}) {
 	}
 
 	const RenderRadioText= () => {
-		return (<View style={{width:'100%', paddingVertical:50}}>
+		return (<View style={{ paddingVertical:15}}>
 				{data.options.map( (option,index) => (
                 <SelectButton
                   key={option.id}
@@ -140,28 +150,39 @@ function QuestionScreen({questionIndex, setQuestionIndex, route, navigation}) {
 
 	function RenderGenderSelection() {
 		return (
-			<View style={{flex:1, flexDirection:'row', alignItems:'space-around'}}>
-				<TouchableOpacity onPress={()=>setGender(0)}>
-					<RenderFemale/>
-				</TouchableOpacity>
-				<TouchableOpacity onPress={()=>setGender(1)}>
-					<RenderMale/>
-				</TouchableOpacity>
+			<View style={styles.genderContainer}>
+				<View style={{flexDirection:'row', alignItems:'space-between'}}>
+					<TouchableOpacity onPress={()=>setGender(0)}>
+						<RenderFemale/>
+					</TouchableOpacity>
+					<View style={{width:50}}/>
+					<TouchableOpacity onPress={()=>setGender(1)}>
+						<RenderMale/>
+					</TouchableOpacity>
+				</View>
 			</View>
+			
 		);
 	}
 
 	return (
 		<View style={styles.container}>
 			
-			<Image source ={images[data.image]}/>
-			<RenderLabel/>
-
-			<RenderSelections type={data.type}/>
+			<View style={styles.topContainer}>
+				<View style={styles.imageContainer}>
+					<Image source ={images[data.image]}/>
+				</View>
+				
+				<RenderLabel/>
+				<RenderSelections type={data.type}/>
+			</View>
+						
+			<View style={styles.bottomContainer}>
+				<CyanButton style={{ }} onPress={()=>
+					onSubmitted()
+				} title='Continue'/>
+			</View>
 			
-			<CyanButton onPress={()=>
-				onSubmitted()
-			} title='Continue'/>
 			<Alert 
 				title={alerts['start']}
 				visible={alertShow} onPress={()=>

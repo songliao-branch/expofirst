@@ -24,8 +24,7 @@ const App = () => {
         screenOptions= {{
           gestureEnabled:false
        }
-    }
-      > 
+       }> 
     
       <Stack.Screen 
       name='HomeScreen'
@@ -104,9 +103,6 @@ const HeaderRight = ({pageIndex}) => {
 }
 
 const styles = StyleSheet.create({
-  containerSlider: {
-    position:'relative'
-},
   primaryTheme: {
     color: '#5cced8' //cyan
   },
@@ -115,12 +111,4 @@ const styles = StyleSheet.create({
   }
 });
 
-const MySliderScreen = () => {
-  return (
-    <SafeAreaView style={styles.containerSlider}>
-      <MySlider/>
-    </SafeAreaView>
-  );
-}
-
-export default MySliderScreen;
+export default App;
