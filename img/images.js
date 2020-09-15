@@ -12,6 +12,7 @@ const images = {
  tracker: require("./tracker.png"),
  jason: require("./jason.png"),
  home_doctor: require("./home_doctor.png"),
- home_exercise: require("./home_exercise.png")
+ home_exercise: require("./home_exercise.png"),
+ age_indicator: require("./age_indicator.png")
 }
 export default images;

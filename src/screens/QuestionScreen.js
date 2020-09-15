@@ -8,13 +8,14 @@ import SelectButton from '../components/SelectButton';
 import CyanButton from '../components/CyanButton';
 import Alert from '../components/Alert';
 import alerts from '../data/alerts';
+import Slider from '@react-native-community/slider';
 
 const styles = StyleSheet.create({
  container: {
  	backgroundColor: 'white',
- 	alignItems:'flex-start',
+ 	alignItems:'center',
  	height:'100%',
- 	flex:1,
+ 	
  	justifyContent:'space-between'
  },
   primaryTheme: {
@@ -34,9 +35,7 @@ const styles = StyleSheet.create({
   },
 });
 
-
 function QuestionScreen({questionIndex, setQuestionIndex, route, navigation}) {
-	// const { questionIndex, setQuestionIndex } = route.params;
 
 	const [selectedIndex, setSelectedIndex] = useState(-1)
 	const [alertShow, setAlertShow] = useState(false);
@@ -61,10 +60,6 @@ function QuestionScreen({questionIndex, setQuestionIndex, route, navigation}) {
 	function goToNextScreen() {
 		setQuestionIndex(questionIndex + 1)
 		navigation.push('QuestionScreen')
-		// navigation.navigate('QuestionScreen', {
-		// 	questionIndex: {questionIndex},
-		// 	setQuestionIndex: {setQuestionIndex}
-		// })
 	}
 
 	const RenderLabel = () => 
@@ -81,10 +76,28 @@ function QuestionScreen({questionIndex, setQuestionIndex, route, navigation}) {
 			case "scale_age":
 				return null;
 			case "scale_body":
-				return null;
+				return <RenderBodyMetrics/>;
 			default:
 				return null;
 		}
+	}
+
+	const RenderBodyMetrics= ()=> {
+		return (
+			<View>
+				<Image source={gender==0?images['woman']:images['man']}/>
+				<Slider
+					style={{width: 300, height: 40}}
+					minimumValue={0}
+					maximumValue={1}
+					
+					thumbImage={()=>
+					<Image source={require('../../img/back.png')}/>}
+					minimumTrackTintColor="blue"
+					maximumTrackTintColor="rgba(0,0,0,0.2)"
+  				/>
+			</View>
+		);
 	}
 
 	const RenderRadioText= () => {
@@ -127,7 +140,7 @@ function QuestionScreen({questionIndex, setQuestionIndex, route, navigation}) {
 
 	function RenderGenderSelection() {
 		return (
-			<View style={{flex:1, flexDirection:'row', alignItems:'center'}}>
+			<View style={{flex:1, flexDirection:'row', alignItems:'space-around'}}>
 				<TouchableOpacity onPress={()=>setGender(0)}>
 					<RenderFemale/>
 				</TouchableOpacity>

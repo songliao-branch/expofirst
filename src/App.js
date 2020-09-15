@@ -11,6 +11,7 @@ import HomeScreen from './screens/HomeScreen';
 import questions from './data/questions';
 import images from '../img/images';
 import ChallengeScreen from './screens/ChallengeScreen';
+import MySlider from './components/MySlider';
 
 const Stack = createStackNavigator();
 
@@ -20,15 +21,18 @@ const App = () => {
   return (
       <NavigationContainer>
       <Stack.Navigator initialRouteName='Home'
+        screenOptions= {{
+          gestureEnabled:false
+       }
+    }
       > 
-     
-
+    
       <Stack.Screen 
       name='HomeScreen'
       component={HomeScreen}
       options={{title:''}}
       />
-        <Stack.Screen 
+      <Stack.Screen 
       name='ChallengeScreen'
       component={ChallengeScreen}
       options={{title:''}}
@@ -99,9 +103,13 @@ const HeaderRight = ({pageIndex}) => {
     );
 }
 
-
 const styles = StyleSheet.create({
-
+  containerSlider: {
+    flex:1,
+    flexDirection:'row',
+    backgroundColor:'#fff',
+    position:'relative'
+},
   primaryTheme: {
     color: '#5cced8' //cyan
   },
@@ -110,4 +118,12 @@ const styles = StyleSheet.create({
   }
 });
 
-export default App;
+const MySliderScreen = () => {
+  return (
+    <SafeAreaView style={styles.containerSlider}>
+      <MySlider/>
+    </SafeAreaView>
+  );
+}
+
+export default MySliderScreen;

@@ -7,7 +7,7 @@ import {TouchableOpacity, ScrollView,StyleSheet,View, Button} from 'react-native
 import ChallengeScreen from "./ChallengeScreen";
 
 const styles = StyleSheet.create({
-    container: {
+     container: {
       flex: 1,
       paddingTop:22,
       paddingLeft:15,
@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
       color: '#515a60'
     }
   });
+
 
 const HomeScreen = ({navigation}) => {
 
