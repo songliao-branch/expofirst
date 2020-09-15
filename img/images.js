@@ -13,6 +13,8 @@ const images = {
  jason: require("./jason.png"),
  home_doctor: require("./home_doctor.png"),
  home_exercise: require("./home_exercise.png"),
- age_indicator: require("./age_indicator.png")
+ age_indicator: require("./age_indicator.png"),
+ result_ok: require("./result_ok.png"),
+ result_bad: require("./result_bad.png")
 }
 export default images;

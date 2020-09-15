@@ -12,6 +12,7 @@ import questions from './data/questions';
 import images from '../img/images';
 import ChallengeScreen from './screens/ChallengeScreen';
 import BodyMetricsSlider from "./components/BodyMetricsSlider";
+import ResultScreen from "./screens/ResultScreen";
 
 const Stack = createStackNavigator();
 
@@ -34,6 +35,11 @@ const App = () => {
       <Stack.Screen 
       name='ChallengeScreen'
       component={ChallengeScreen}
+      options={{title:''}}
+      />
+      <Stack.Screen 
+      name='ResultScreen'
+      component={ResultScreen}
       options={{title:''}}
       />
       <Stack.Screen
@@ -110,13 +116,5 @@ const styles = StyleSheet.create({
     color : '#f0f0f0' //gray'
   }
 });
-
-const test = () => {
-  return (<SafeAreaView>
-      <BodyMetricsSlider metrics="Weight"/>
-      <BodyMetricsSlider metrics="Height"/>
-    </SafeAreaView>
-   );
-}
 
 export default App;

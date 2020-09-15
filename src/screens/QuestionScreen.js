@@ -68,8 +68,12 @@ function QuestionScreen({questionIndex, setQuestionIndex, route, navigation}) {
 	}
 
 	function goToNextScreen() {
-		setQuestionIndex(questionIndex + 1)
-		navigation.push('QuestionScreen')
+		if (questionIndex + 1 < questions.length) {
+			setQuestionIndex(questionIndex + 1)
+			navigation.push('QuestionScreen')
+		}else {
+			navigation.push("ResultScreen")
+		}		
 	}
 
 	const RenderLabel = () => 
