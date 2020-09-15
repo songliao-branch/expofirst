@@ -19,6 +19,16 @@ const indicatorWrapperWidth = 140;
 const indicatorWrapperHeight = 250;
 const fixedIndicatorHeight = 60;
 
+
+const RulerContainer = () => {
+    return (
+        <View>
+            <Ruler/>
+            <HorizontalSpacer/> 
+            <Markers/>
+        </View>);
+}
+
 const Ruler = () => {
     return (
         <View style={styles.ruler}>
@@ -31,7 +41,7 @@ const Ruler = () => {
                 key={i}
                 style={[styles.segment, {
                     backgroundColor: 'gray',
-                    height: tenth ? 20 : 10,
+                    height: tenth ? 15 : 10,
                     marginRight: i === (data.length-1) ? 0 : segmentSpacing
                 }]}
             >
@@ -54,7 +64,6 @@ const HorizontalSpacer = () => {
 
 const Markers = () => {
     return (
-       
         <View style={[styles.markers]}>
         <View style={styles.spacer }/>
 
@@ -69,7 +78,7 @@ const Markers = () => {
                     fontSize: 15,
                     fontWeight: 'bold',
                     color: 'gray',
-                    height: tenth ? 20 : 10,
+                    height: 15,
                     marginRight: age === (data.length-1) ? 0 : 
                     (index == 0 ? (snapSegment * (10 - minAge%10) - 29) : segmentSpacing*10)
                 }}
@@ -105,45 +114,43 @@ class MySlider extends React.Component {
 
     render() {
     return (
-        <SafeAreaView>
+        <View style={{position:'relative'}}>
             <View style={styles.indicatorContainer}> 
-            <View style={styles.indicatorTextWrapper}>
-                <Image style={{position:'relative'}} source={images['age_indicator']}/>
-                <TextInput 
-                    ref={this.textInputRef} 
-                    style={styles.indicatorTextStyle}
-                    defaultValue={minAge.toString()}
-                />
+                <View style={styles.indicatorTextWrapper}>
+                    <Image style={{position:'relative'}} source={images['age_indicator']}/>
+                    <TextInput 
+                        ref={this.textInputRef} 
+                        style={styles.indicatorTextStyle}
+                        defaultValue={minAge.toString()}
+                    />
+                </View>
+                <View style={styles.fixedIndicator}/>
             </View>
-           
-            <View style={styles.fixedIndicator}/>
-        </View>
-        <Animated.ScrollView 
-            ref={this.scrollViewRef}
-            horizontal
-            contentContainerStyle={styles.scrollview}
-            bounces={false}
-            showsHorizontalScrollIndicator={false}
-            scrollEventThrottle={160}
-            snapToInterval={snapSegment}
-            onScroll={Animated.event(
-                [
-                    {
-                    nativeEvent : {
-                        contentOffset: {x: this.state.scrollX}
+            <View style={styles.scrollViewContainer}>
+            <Animated.ScrollView 
+                ref={this.scrollViewRef}
+                horizontal
+                contentContainerStyle={styles.scrollview}
+                bounces={false}
+                showsHorizontalScrollIndicator={false}
+                scrollEventThrottle={160}
+                snapToInterval={snapSegment}
+                onScroll={Animated.event(
+                    [
+                        {
+                        nativeEvent : {
+                            contentOffset: {x: this.state.scrollX}
+                        }
                     }
-                }
-                ], {useNativeDriver: true}
-            )}
-        >
-       <View>
-       <Ruler/>
-       <HorizontalSpacer/> 
-       <Markers/>
-       </View>
-       
-        </Animated.ScrollView>
-        </SafeAreaView>
+                    ], {useNativeDriver: true}
+                )}
+            >
+            <RulerContainer/>
+        
+            </Animated.ScrollView>
+            </View>
+            
+        </View>
         )
       }
 }
@@ -164,6 +171,10 @@ const styles = StyleSheet.create({
     },
     segment: {
         width: segmentWidth
+    },
+    scrollViewContainer: {
+        position:'absolute',
+        top:indicatorWrapperHeight - 65
     },
     scrollview: {
         justifyContent:'flex-end'
