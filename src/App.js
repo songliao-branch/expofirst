@@ -11,7 +11,7 @@ import HomeScreen from './screens/HomeScreen';
 import questions from './data/questions';
 import images from '../img/images';
 import ChallengeScreen from './screens/ChallengeScreen';
-import MySlider from './components/MySlider';
+import BodyMetricsSlider from "./components/BodyMetricsSlider";
 
 const Stack = createStackNavigator();
 
@@ -110,5 +110,13 @@ const styles = StyleSheet.create({
     color : '#f0f0f0' //gray'
   }
 });
+
+const test = () => {
+  return (<SafeAreaView>
+      <BodyMetricsSlider metrics="Weight"/>
+      <BodyMetricsSlider metrics="Height"/>
+    </SafeAreaView>
+   );
+}
 
 export default App;

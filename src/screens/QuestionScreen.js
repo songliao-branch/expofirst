@@ -8,8 +8,8 @@ import SelectButton from '../components/SelectButton';
 import CyanButton from '../components/CyanButton';
 import Alert from '../components/Alert';
 import alerts from '../data/alerts';
-import Slider from '@react-native-community/slider';
 import MySlider from "../components/MySlider";
+import BodyMetricsSlider from "../components/BodyMetricsSlider";
 
 const styles = StyleSheet.create({
  container: { 
@@ -94,18 +94,10 @@ function QuestionScreen({questionIndex, setQuestionIndex, route, navigation}) {
 
 	const RenderBodyMetrics= ()=> {
 		return (
-			<View>
+			<View style={styles.genderContainer}>
 				<Image source={gender==0?images['woman']:images['man']}/>
-				<Slider
-					style={{width: 300, height: 40}}
-					minimumValue={0}
-					maximumValue={1}
-					
-					thumbImage={()=>
-					<Image source={require('../../img/back.png')}/>}
-					minimumTrackTintColor="blue"
-					maximumTrackTintColor="rgba(0,0,0,0.2)"
-  				/>
+				<BodyMetricsSlider metrics="Weight"/>
+     			<BodyMetricsSlider metrics="Height"/>
 			</View>
 		);
 	}
