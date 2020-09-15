@@ -70,7 +70,10 @@ const App = () => {
 };
 
 function goBack(questionIndex, setQuestionIndex, navigation) {
-    setQuestionIndex(questionIndex - 1)
+    if(questionIndex > 0) {
+      setQuestionIndex(questionIndex - 1)
+    }
+  
     navigation.goBack()
 }
 
@@ -88,16 +91,18 @@ function BackButton({questionIndex, setQuestionIndex, navigation}) {
 //     );
 // }
 
-function ProgressBar(props) {
+const ProgressBar = ({pageIndex}) => {
+  if(pageIndex == 0) return null;
   return (
-    <Progress.Bar progress={props.pageIndex/questions.length} width={200}
+    <Progress.Bar progress={pageIndex/questions.length} width={200}
     height ={6} color={styles.primaryTheme.color} unfilledColor={styles.secondaryTheme.color} borderWidth={0} /> 
     );
 }
 
-function HeaderRight(props) {
+const HeaderRight = ({pageIndex}) => {
+  if(pageIndex == 0) return null;
   return (
-      <Text>{props.pageIndex}/{questions.length-1}</Text>
+      <Text>{pageIndex}/{questions.length-1}</Text>
     );
 }
 const HomeScreen = ({navigation}) => {
