@@ -105,9 +105,6 @@ const HeaderRight = ({pageIndex}) => {
 
 const styles = StyleSheet.create({
   containerSlider: {
-    flex:1,
-    flexDirection:'row',
-    backgroundColor:'#fff',
     position:'relative'
 },
   primaryTheme: {

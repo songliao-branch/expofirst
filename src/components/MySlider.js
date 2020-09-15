@@ -6,7 +6,7 @@ const {width} = Dimensions.get('screen');
 
 const minAge = 5;
 const segmentsLength = 91;//max age=segmentsLength+ minAge
-const segmentWidth = 1; 
+const segmentWidth = 2; 
 const segmentSpacing = 12;
 
 const snapSegment = segmentWidth + segmentSpacing 
@@ -44,6 +44,18 @@ class MySlider extends React.Component {
     render() {
     return (
         <SafeAreaView>
+            <View style={styles.indicatorContainer}> 
+            <View style={styles.indicatorTextWrapper}>
+                <Image style={{position:'relative'}} source={images['age_indicator']}/>
+                <TextInput 
+                    ref={this.textInputRef} 
+                    style={styles.indicatorTextStyle}
+                    defaultValue={minAge.toString()}
+                />
+            </View>
+           
+            <View style={styles.fixedIndicator}/>
+        </View>
         <Animated.ScrollView 
             ref={this.scrollViewRef}
             horizontal
@@ -62,35 +74,27 @@ class MySlider extends React.Component {
                 ], {useNativeDriver: true}
             )}
         >
-        <View style={styles.ruler}>
+       
+        <View style={styles.rulerMarkContainer}>
+        <View style={styles.rulerContainer}>
             <View style={styles.spacer }/>
+           
             {data.map( i=> {
                 const tenth = i % 10 === 0;
-                return (<View
+                return (<Text
                     key={i}
                     style={[styles.segment, {
-                        backgroundColor: tenth ? 'red' : 'green',
-                        height: tenth ? 40 : 20,
+                        backgroundColor: 'gray',
+                        height: tenth ? 20 : 10,
                         marginRight: i === (data.length-1) ? 0 : segmentSpacing
                     }]}
-                >
-                    
-                </View>);
+                >{i}
+                </Text>);
             })}
         </View>
-        </Animated.ScrollView>
-        <View style={styles.indicatorWrapper}> 
-            <View style={styles.indicatorTextWrapper}>
-                <Image style={{position:'relative'}} source={images['age_indicator']}/>
-                <TextInput 
-                    ref={this.textInputRef} 
-                    style={styles.indicatorTextStyle}
-                    defaultValue={minAge.toString()}
-                />
-            </View>
-           
-            <View style={styles.fixedIndicator}/>
         </View>
+        
+        </Animated.ScrollView>
         </SafeAreaView>
         )
       }
@@ -99,7 +103,7 @@ class MySlider extends React.Component {
 export default MySlider;
 
 const styles = StyleSheet.create({
-    ruler: {
+    rulerContainer: {
         flexDirection:'row',
         width : rulerWidth,
         alignItems: 'flex-end',
@@ -124,10 +128,8 @@ const styles = StyleSheet.create({
         fontWeight:'500',
         color:'rgba(81,89,97,1)'
     },
-    indicatorWrapper: {
-        position: 'absolute',
+    indicatorContainer: {
         left: (width - indicatorWrapperWidth) / 2 ,
-        bottom:  -40,
         alignItems: 'center',
         justifyContent:'center',
         width: indicatorWrapperWidth,
