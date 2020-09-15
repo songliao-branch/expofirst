@@ -4,7 +4,7 @@ import images from "../../img/images";
 
 const {width} = Dimensions.get('screen');
 
-const minAge = 5;
+const minAge = 10;
 const segmentsLength = 91;//max age=segmentsLength+ minAge
 const segmentWidth = 2; 
 const segmentSpacing = 12;
@@ -18,6 +18,68 @@ const data = [...Array(segmentsLength).keys()].map(i => i + minAge);
 const indicatorWrapperWidth = 140;
 const indicatorWrapperHeight = 250;
 const fixedIndicatorHeight = 60;
+
+const Ruler = () => {
+    return (
+        <View style={styles.ruler}>
+        <View style={styles.spacer }/>
+
+        {data.map( i=> {
+            const tenth = i % 10 === 0;
+            return (
+            <View
+                key={i}
+                style={[styles.segment, {
+                    backgroundColor: 'gray',
+                    height: tenth ? 20 : 10,
+                    marginRight: i === (data.length-1) ? 0 : segmentSpacing
+                }]}
+            >
+            </View>);
+        })}
+        <View style={styles.spacer }/>
+     </View>
+    );
+}
+
+const HorizontalSpacer = () => {
+    return (
+        <View style={styles.ruler}>
+        <View style={styles.spacer }/>
+            <View style={{backgroundColor:'gray', height:1, width: rulerWidth}}/>
+        <View style={styles.spacer }/>
+     </View>
+    );
+}
+
+const Markers = () => {
+    return (
+       
+        <View style={[styles.markers]}>
+        <View style={styles.spacer }/>
+
+        {data.map( (age, index)=> {
+            const tenth = index % 10 === 0;
+            if (!tenth) return null;
+            return (
+            <Text
+                key={index}
+                style={{
+                    width: 20,
+                    fontSize: 15,
+                    fontWeight: 'bold',
+                    color: 'gray',
+                    height: tenth ? 20 : 10,
+                    marginRight: age === (data.length-1) ? 0 : 
+                    (index == 0 ? (snapSegment * (10 - minAge%10) - 29) : segmentSpacing*10)
+                }}
+            >{age}
+            </Text>);
+        })}
+        <View style={styles.spacer}/>
+     </View>
+    );
+}
 
 class MySlider extends React.Component {
 
@@ -40,7 +102,7 @@ class MySlider extends React.Component {
         })
     }
 
-   
+
     render() {
     return (
         <SafeAreaView>
@@ -74,26 +136,12 @@ class MySlider extends React.Component {
                 ], {useNativeDriver: true}
             )}
         >
+       <View>
+       <Ruler/>
+       <HorizontalSpacer/> 
+       <Markers/>
+       </View>
        
-        <View style={styles.rulerMarkContainer}>
-        <View style={styles.rulerContainer}>
-            <View style={styles.spacer }/>
-           
-            {data.map( i=> {
-                const tenth = i % 10 === 0;
-                return (<Text
-                    key={i}
-                    style={[styles.segment, {
-                        backgroundColor: 'gray',
-                        height: tenth ? 20 : 10,
-                        marginRight: i === (data.length-1) ? 0 : segmentSpacing
-                    }]}
-                >{i}
-                </Text>);
-            })}
-        </View>
-        </View>
-        
         </Animated.ScrollView>
         </SafeAreaView>
         )
@@ -103,11 +151,16 @@ class MySlider extends React.Component {
 export default MySlider;
 
 const styles = StyleSheet.create({
-    rulerContainer: {
+    ruler: {
         flexDirection:'row',
         width : rulerWidth,
-        alignItems: 'flex-end',
+        alignItems: 'flex-start',
         justifyContent:'flex-start',  
+    },
+    markers: {
+        flexDirection:'row',
+        width : rulerWidth,
+        paddingTop: 7
     },
     segment: {
         width: segmentWidth
@@ -142,8 +195,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#00BCD4'
     }, 
     spacer: {
-        width: spacerWidth,
-        backgroundColor: 'red'
+        width: spacerWidth
     }
 });
   
