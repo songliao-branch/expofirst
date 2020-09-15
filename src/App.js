@@ -8,8 +8,8 @@ import * as Progress from 'react-native-progress';
 import {TouchableOpacity, ScrollView, FlatList,StyleSheet, SafeAreaView, Text,TextInput,View, Button, Image} from 'react-native';
 import QuestionScreen from './screens/QuestionScreen';
 import HomeScreen from './screens/HomeScreen';
-
 import questions from './data/questions';
+import images from '../img/images';
 
 const Stack = createStackNavigator();
 
@@ -67,7 +67,10 @@ function goBack(questionIndex, setQuestionIndex, navigation) {
 }
 
 function BackButton({questionIndex, setQuestionIndex, navigation}) {
-  return (<HeaderBackButton onPress={
+  return (<HeaderBackButton 
+    backImage={()=> <Image source={images['back']}/>}
+    labelVisible={false}
+    onPress={
     ()=> goBack(questionIndex, setQuestionIndex, navigation) }
   />)
 }
